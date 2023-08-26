@@ -23,9 +23,10 @@
  * @license    https://gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-//defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die();
 
-//require_once($CFG->dirroot . '/mod/evaluation/lib.php');
+require_once($CFG->dirroot . '/mod/evaluation/lib.php');
+
 class block_evaluation extends block_list {
 
     function init() {
