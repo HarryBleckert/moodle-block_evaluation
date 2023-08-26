@@ -19,13 +19,13 @@
  *
  * @package    block_evaluation
  * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */ 
+ * @copyright  2021 onwards Harry Bleckert (Bleckert.com) for ASH Berlin
+ * @license    https://gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
-defined('MOODLE_INTERNAL') || die();
+//defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/mod/evaluation/lib.php');
-
+//require_once($CFG->dirroot . '/mod/evaluation/lib.php');
 class block_evaluation extends block_list {
 
     function init() {
