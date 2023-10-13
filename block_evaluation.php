@@ -40,7 +40,6 @@ class block_evaluation extends block_list {
 
     function get_content() 
 	{	global $CFG, $DB, $OUTPUT, $USER;
-
         if ($this->content !== NULL) {
             return $this->content;
         }
