@@ -80,21 +80,24 @@ class block_evaluation extends block_list {
 			
 			if ( !isset( $_SESSION["allteachers"][$courseid] ) OR empty($_SESSION["allteachers"][$courseid]) )
 			{	evaluation_get_course_teachers( $courseid); }
-			
-			// redirect to reminder page if activated! (after 17:00, on Saturdays and on Sundays)
-			if ( !isset($_SESSION["Evaluation_now"]) AND $is_open AND $reminder AND ( idate("H")>17 OR idate("w")==6 OR idate("w")==0)  
-				AND ( $showAnalysis OR (isset( $_SESSION["allteachers"][$courseid][$USER->id] )
-					?false :$courseid != SITEID AND !evaluation_has_user_participated($evaluation, $USER->id, $courseid ) ))
-			)
-			{	$_SESSION["Evaluation_now"] = 1;
+
+            // redirect(new moodle_url($url));
+			// redirect to reminder page if activated! (daily after 17:00, on Saturdays and on Sundays)
+			if ( !isset($_SESSION["Evaluation_now"]) AND $is_open AND $reminder
+                    AND ( idate("H")>17 OR idate("w")==6 OR idate("w")==0)
+				AND ( $showAnalysis OR (!isset($_SESSION["allteachers"][$courseid][$USER->id]) &&
+                                    ($courseid != SITEID and !evaluation_has_user_participated($evaluation, $USER->id, $courseid))))
+			){
+                $_SESSION["Evaluation_now"] = 1;
 				redirect(new moodle_url($url)); 
 			}
 			
 			
 			// add treacherid to params if required		
 			if ( isset( $_SESSION["allteachers"][$courseid][$USER->id] ) )
-			{	$url->params( array('teacherid' => $USER->id ) ); }				
-			$this->content->items[] = '<a href="'.$url->out().'">'.$reminder." <b>$evaluation->name</b></a><br>\n";
+			{	$url->params( array('teacherid' => $USER->id ) ); }
+            $ev_name = ev_get_tr($evaluation->name);
+			$this->content->items[] = '<a href="'.$url->out().'">'.$reminder." <b>$ev_name</b></a><br>\n";
 		}
         return $this->content;
     }
